@@ -18,7 +18,6 @@ meals <- list(
 
 meals$dinner <- c("Pho", "Cheesecake")
 
-
 # Use dollar notation to extract your `dinner` element from your list
 # and save it in a vector called 'dinner'
 dinner <- meals$dinner

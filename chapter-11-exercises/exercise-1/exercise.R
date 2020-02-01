@@ -11,44 +11,57 @@ library(fueleconomy)
 
 # You should now have access to the `vehicles` data frame
 # You can use `View()` to inspect it
-
+View(vehicles)
 
 # Select the different manufacturers (makes) of the cars in this data set. 
 # Save this vector in a variable
-
+makes_of_car <- vehicles$make
 
 # Use the `unique()` function to determine how many different car manufacturers
 # are represented by the data set
-
+length(unique(makes_of_car))
 
 # Filter the data set for vehicles manufactured in 1997
-
+vehicles_1997 <- vehicles[vehicles["year"] == 1997, ]
 
 # Arrange the 1997 cars by highway (`hwy`) gas milage
 # Hint: use the `order()` function to get a vector of indices in order by value
 # See also:
 # https://www.r-bloggers.com/r-sorting-a-data-frame-by-the-contents-of-a-column/
-
+vehicles_1997[order(vehicles_1997$hwy), ]
 
 # Mutate the 1997 cars data frame to add a column `average` that has the average
 # gas milage (between city and highway mpg) for each car
-
+vehicles_1997$average <- vehicles_1997$hwy + vehicles_1997$cty / 2
+View(vehicles_1997)
 
 # Filter the whole vehicles data set for 2-Wheel Drive vehicles that get more
 # than 20 miles/gallon in the city. 
 # Save this new data frame in a variable.
-
+vehicles_2wd <- vehicles[vehicles$drive == "2-Wheel Drive", ]
+effecient_2wd <- vehicles_2wd[vehicles$cty > 20, ]
+print(effecient_2wd)
 
 # Of the above vehicles, what is the vehicle ID of the vehicle with the worst 
 # hwy mpg?
 # Hint: filter for the worst vehicle, then select its ID.
-
+worst_hwy <- vehicles_2wd[vehicles_2wd$hwy == min(vehicles_2wd$hwy), "id"]
+print(worst_hwy)
 
 # Write a function that takes a `year_choice` and a `make_choice` as parameters, 
 # and returns the vehicle model that gets the most hwy miles/gallon of vehicles 
 # of that make in that year.
 # You'll need to filter more (and do some selecting)!
-
+best_model<- function(year_choice, make_choice) {
+  make_and_year <- vehicles[vehicles$make == make_choice & vehicles$year == year_choice, ]
+  best_hwy <- make_and_year[make_and_year$hwy == max(make_and_year$hwy), "model"]
+  return(best_hwy)
+}
 
 # What was the most efficient Honda model of 1995?
+best_model("1995", "Honda")
+
+install.packages("dplyr")
+library("dplyr")
+install.packages("pkgconfig")
 
