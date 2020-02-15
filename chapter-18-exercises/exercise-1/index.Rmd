@@ -1,0 +1,36 @@
+---
+title: "index.Rmd"
+author: "Michelle Pham"
+date: "02/11/20"
+output: html_document
+---
+
+## This is my report!
+
+I like writing **reports**
+
+This is the code we will look at in class. Thisis just plain old Markdown that lets you rendertext in **bold** or _italics_. However, you canput in a block of R code, and the document willshow the code and the results!
+
+
+``` {r example, include = FALSE} 
+library(knitr)
+numbers <- runif(1:100)
+hist(numbers)
+numbers_mean <- mean(numbers)  # save the mean
+img_url <- "https://cdn3-www.dogtime.com/assets/uploads/2018/10/puppies-cover.jpg"
+ im
+
+letters <- c("a", "b", "c", "d")
+numbers <- 1:4
+df <- data.frame(letters = letters, numbers = numbers)
+
+
+
+```
+
+`r kable(df)`
+The mean of the numbers happen to the be **`r numbers_mean`**.
+
+``` {r other_chunk}
+print(numbers)
+```
