@@ -27,12 +27,14 @@ ggplot(data = diamonds) +
 # Draw a plot with point geometry with the x-position mapped to `cut` and the 
 # y-position mapped to `clarity`
 # This creates a "grid" grouping the points
-
+ggplot(data = diamonds) +
+  geom_point(mapping = aes(x = cut, y = clarity))
 
 # Use the "jitter" position adjustment to keep the points from all overlapping!
 # (This works a little better with a sample of diamond data, such as from the 
 # previous exercise).
-
+ggplot(data = diamonds) +
+  geom_jitter(mapping = aes(x = cut, y = clarity))
 
 
 ## Scales
@@ -81,18 +83,16 @@ ggplot(data = diamonds_sample) +
 # For best results, SET the `width` of the geometry to be 1 (fill plot, no space
 # between)
 # TIP: You can save the plot to a variable for easier modifications
-ggplot(data = diamonds_sample) +
+chart1 <- ggplot(data = diamonds_sample) +
   geom_col(mapping = aes(x = cut, y = price, color = cut), width = 1)
 
 # Draw the same chart, but with the coordinate system flipped
-ggplot(data = diamonds_sample) +
+chart2 <- ggplot(data = diamonds_sample) +
   geom_col(mapping = aes(x = cut, y = price, color = cut), width = 1) +
   coord_flip()
 
 # Draw the same chart, but in a polar coordinate system. It's a Coxcomb chart!
-ggplot(data = diamonds_sample) +
-  coord_polar(mapping = aes(x = cut, color = cut), width = 1) +
-  coord_flip()
+chart2 + coord_polar(theta = "y")
 
 
 ## Facets
@@ -108,4 +108,4 @@ ggplot(data = diamonds_sample) +
 # Use the `ggsave()` function to save the current (recent) plot to disk.
 # Name the output file "my-plot.png".
 # Make sure you've set the working directory!!
-
+ggsave("my-plot.png", plot = last_plot())
